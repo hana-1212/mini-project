@@ -11,7 +11,10 @@ class ProductController extends Controller
     {
         $data['page_title'] = 'Product Page';
         $data['active'] = 'product';
-        $data['products'] = DB::table('products')->where('flag',1)->paginate(8);
+        $data['products'] = DB::table('products')->where('flag',1)->paginate(2);
+
+        // DB::table('product')->where
+        //select * from products where flag=1s ()
 
         return view('Frontend.pages.product',$data);
     }

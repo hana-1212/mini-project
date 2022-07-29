@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
     public function getIndex(){
-        return view('Backend.pages.dashboard.index');
+        return view('Backend.page.dashboard.index');
     }
 }

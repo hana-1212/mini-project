@@ -8,9 +8,11 @@ use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\OrdersController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Backend\CustomersController;
+use App\Http\Controllers\Frontend\ContactFrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +41,13 @@ Route::get('/', function () {
     return view('Frontend.pages.product_detail');
    });
 
-   Route::get('/contact', function () {
-    return view('Frontend.pages.contact');
-   });
+//    Route::get('/contact', function () {
+//     return view('Frontend.pages.contact');
+//    })->name("lihatContact");
+
+   Route::get('/contact',[ContactFrontendController::class,"getIndex"])->name("lihatContact");
+
+   Route::post('/contact',[ContactFrontendController::class,"postAddSave"])->name("simpanContact");
 
    Route::get('/cart', function () {
     return view('Frontend.pages.cart');
@@ -51,7 +57,7 @@ Route::get('/', function () {
     return view('Frontend.pages.billing');
    });
 
-   Route::prefix('admin')->group(function()
+Route::prefix('admin')->group(function()
     {
         Route::get('login',[LoginController::class,"getIndex"])->name("login");
         Route::post('login',[LoginController::class,"postLogin"])->name("loginFunction");
@@ -61,7 +67,11 @@ Route::get('/', function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['admin.login']], function(){
         Route::get('',[AdminController::class,"getIndex"])->name("admin");
 
-
+    Route::prefix('contact')->group(function () {
+        Route::get('/', [ContactController::class, "getIndex"])->name("adminContact");
+        Route::get('/detail/{id}', [ContactController::class, "getDetail"])->name("adminContactDetail");
+        Route::get('/delete/{id}', [ContactController::class, "getDelete"])->name("adminContactDelete");
+    });
 
     Route::prefix('customers')->group(function () {
         Route::get('/',[CustomersController::class,"getIndex"])->name("adminCustomers");
@@ -98,7 +108,6 @@ Route::get('/', function () {
         Route::get('/detail/{id}',[SizeController::class,"getDetail"])->name("adminSizeDetail");
         Route::get('/delete/{id}',[SizeController::class,"getDetele"])->name("adminSizeDelete");
     });
-
 });
 
 Route::get('/',[HomeController::class,"getIndex"])->name("homePage");

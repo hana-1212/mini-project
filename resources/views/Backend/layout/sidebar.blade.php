@@ -49,6 +49,11 @@
             <i class="fas fa-fw fa-list-alt"></i>
             <span>List Size</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('adminContact')}}">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>List Contact</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

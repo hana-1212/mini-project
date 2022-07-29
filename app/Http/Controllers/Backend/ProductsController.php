@@ -20,7 +20,7 @@ class ProductsController extends Controller
                         ->orwhere('product_code','like','%'.$search.'%')
                         ->orwhere('product_price.','like','%'.$search.'%');
                 }
-            })->paginate(10);
+            })->paginate(2);
         return view('Backend.page.products.index',$data);
     }
     public function getAdd() {

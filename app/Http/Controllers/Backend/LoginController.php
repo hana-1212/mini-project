@@ -16,7 +16,7 @@ class LoginController extends Controller
         if (session()->get('admin_id')) {
             return redirect('admin');
         }
-        return view('Backend.pages.login');
+        return view('Backend.page.login');
     }
     public function postLogin(Request $request) {
         $this->validate($request, [
